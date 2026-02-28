@@ -150,6 +150,8 @@ Create a `.env` file in the project root:
 
 ```env
 MISTRAL_API_KEY=your_mistral_api_key_here
+MISTRAL_FLOWANALYST_AGENT_ID=your_flow_analyst_agent_id_here
+MISTRAL_FLOWGEN_AGENT_ID=your_flow_generator_agent_id_here
 ```
 
 ### Run
@@ -169,9 +171,8 @@ mistral-hackathon-flowgen/
 ├── app.py                  # Streamlit UI with embedded Draw.io editor
 ├── generate_flow_chart.py  # Flow chart generation logic
 ├── llm_factory.py          # Mistral AI agent invocation layer
-├── constants.py            # Agent IDs configuration
 ├── requirements.txt        # Python dependencies
-├── .env                    # API keys (not committed)
+├── .env                    # API keys & agent IDs (not committed)
 └── README.md               # This file
 ```
 

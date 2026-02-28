@@ -1,7 +1,6 @@
 import os
 import re
 import sys
-import constants
 from mistralai import Mistral
 
 from dotenv import load_dotenv
@@ -47,8 +46,8 @@ class LLMFactory:
         """
         load_dotenv(override=True)
         api_key = os.getenv("MISTRAL_API_KEY")
-        flowgen_agent_id = constants.MISTRAL_FLOWGEN_AGENT_ID
-        flowanalyst_agent_id = constants.MISTRAL_FLOWANALYST_AGENT_ID
+        flowgen_agent_id = os.getenv("MISTRAL_FLOWGEN_AGENT_ID")
+        flowanalyst_agent_id = os.getenv("MISTRAL_FLOWANALYST_AGENT_ID")
 
         if system_prompt and human_message:
             system_prompt = system_prompt.replace("{", "{{").replace("}", "}}")
