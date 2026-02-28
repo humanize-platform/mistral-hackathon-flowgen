@@ -131,12 +131,6 @@ with col_output:
         </script>
         """
         components.html(drawio_html, height=520)
-        st.download_button(
-            label="📥 Download .drawio XML",
-            data=st.session_state.xml_output,
-            file_name="flowchart.drawio",
-            mime="application/xml",
-        )
     elif not st.session_state.generating and not st.session_state.error:
         st.info("👈 Describe a process on the left and hit **Generate** to see an editable flow diagram here.")
 
