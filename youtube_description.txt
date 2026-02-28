@@ -1,0 +1,66 @@
+🔀 FlowGen AI — Generate Fully Editable Flow Diagrams from Plain Text | Mistral AI Hackathon
+
+Built by Team humanize for the Mistral AI Hackathon
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 THE PROBLEM
+
+Every AI coding assistant today — ChatGPT, Copilot, Claude — gives you either a static image, a Mermaid snippet, or a bulleted list when you ask for a flow chart. None of these are truly editable. You can't drag nodes, rearrange layouts, or refine labels. Professionals need diagrams they can actually work with.
+
+✅ OUR SOLUTION — FlowGen AI
+
+FlowGen AI takes a plain-text process description and produces industry-standard Draw.io XML — a fully editable, drag-and-drop flow diagram you can open in diagrams.net, Confluence, VS Code, or any tool that supports .drawio files.
+
+💡 Other tools give you a picture. FlowGen AI gives you an editable diagram.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 POWERED BY MISTRAL AI AGENTS — The USP
+
+At the heart of FlowGen AI is a two-agent pipeline built using the Mistral Agent Builder on the Mistral Medium Latest model. This is not a single-prompt hack — it's a purpose-built multi-agent architecture where each agent is a specialist:
+
+🔹 Agent 1 — Flow Analyst
+   Takes messy, conversational text and transforms it into a clean, structured process breakdown. It identifies decision points, branches, parallel paths, and resolves ambiguities — acting like an intelligent process consultant.
+
+🔹 Agent 2 — Flow Generator
+   Converts the structured step list into valid Draw.io XML with proper diagram nodes (rectangles, diamonds, ellipses), directed edges, calculated spatial layout, and professional styling.
+
+Why two agents instead of one?
+   • Dedicated analyst ensures correct logic extraction — no misinterpreted flows
+   • Dedicated generator focuses purely on valid XML — no formatting errors
+   • Decision branches are explicitly mapped, never dropped
+   • Each agent has a narrow, well-defined task for maximum reliability
+
+This two-agent design is the key differentiator — it produces significantly better, more reliable results than a single-prompt approach.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎬 WHAT YOU'LL SEE IN THIS DEMO
+
+1. Type a plain-text process description into the Streamlit app
+2. Watch the Mistral AI agents analyze and generate the flow chart in real time
+3. See the result rendered inside an embedded Draw.io editor — fully interactive
+4. Drag nodes, edit labels, rearrange the layout, and download the .drawio file
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛠️ TECH STACK
+
+• AI: Mistral AI Agents API (Mistral Medium Latest)
+• Backend: Python, LangChain Core
+• Frontend: Streamlit with embedded Draw.io editor
+• Output Format: Draw.io XML (mxfile) — industry standard for editable diagrams
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 LINKS & RESOURCES
+
+GitHub: https://github.com/humanize-platform/mistral-hackathon-flowgen
+Mistral Agent Builder: https://console.mistral.ai/
+Draw.io / diagrams.net: https://app.diagrams.net
+Streamlit: https://streamlit.io
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+#MistralAI #Hackathon #MistralHackathon #AIAgents #FlowChart #DrawIO #Streamlit #GenAI #LLM #Python #TeamHumanize #FlowGenAI #DiagramsNet #NoCode #Editable #MultiAgent

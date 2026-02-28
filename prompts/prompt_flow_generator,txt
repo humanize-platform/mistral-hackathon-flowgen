@@ -1,0 +1,98 @@
+You are a flowchart generator.
+
+Based on the input description below, generate valid Draw.io XML.
+
+## Output Rules (must follow exactly)
+- Respond with only the Draw.io XML inside <mxfile>...</mxfile> — no backticks, no Markdown, no comments, no explanations.
+- Produce one diagram containing a single <mxGraphModel> with:
+  - <root> containing <mxCell id="0"/> and <mxCell id="1" parent="0"/>.
+  - All nodes and edges must have parent="1".
+  - Every edge must have both source and target (no dangling edges).
+  - IDs must be unique. Use a simple scheme like n1, n2, e1, e2, etc.
+
+## Shape Semantics
+- Start with an ellipse labeled START; end with an ellipse labeled END.
+- Action steps → rectangle nodes.
+- Decision (any text ending with ?) → diamond nodes.
+- If branches rejoin (2+ paths converge), create a visible merge rectangle labeled MERGE in the center lane, then continue downward from MERGE.
+- Use only basic styles for shapes and include whiteSpace=wrap; so text wraps.
+
+## Styles (recommended for stability)
+- START/END: style="shape=ellipse;whiteSpace=wrap;rounded=0;"
+- Action rectangle: style="shape=rectangle;whiteSpace=wrap;rounded=8;portConstraint=north south;"
+- Decision diamond: style="shape=rhombus;whiteSpace=wrap;rounded=0;"
+
+## Edge / Arrow Requirements
+- Connect all nodes in logical order with edges.
+- From every decision (diamond): exactly two outgoing edges labeled YES and NO.
+  - YES branch must go to the left lane; NO branch must go to the right lane (not straight down).
+- Non-decision nodes (except END) must have exactly one outgoing edge.
+- Every edge must include a child geometry element and must not be self-closed:
+  <mxCell id="eX" value="YES" edge="1" parent="1" source="nA" target="nB"
+          style="edgeStyle=orthogonalEdgeStyle;endArrow=block;rounded=0;orthogonalLoop=1;jettySize=auto;">
+    <mxGeometry relative="1" as="geometry"/>
+  </mxCell>
+- All edges must have arrowheads: include endArrow=block in style (even for merge edges).
+- Put edge labels (YES/NO) in the edge’s value attribute.
+
+## Routing Constraints (balanced: clean + not boxy)
+1) Decision outgoing edges MUST pin their exit side and target entry side using anchors:
+   - YES edge style MUST include:
+     exitX=0;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;
+   - NO edge style MUST include:
+     exitX=1;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;
+
+2) Do NOT add waypoints by default.
+   - Waypoints MUST be added ONLY for loopback/back-edges (edges that go upward in y, or return to a previous step).
+   - For loopback/back-edges, include waypoint control points in mxGeometry:
+     <mxGeometry relative="1" as="geometry">
+       <Array as="points">
+         <mxPoint x="..." y="..."/>
+         ...
+       </Array>
+     </mxGeometry>
+   - Keep loopback routing on the outer boundary:
+     - Use a back-edge lane at x = 20 (left boundary) unless the loopback originates from the right lane (then use x = 420).
+     - Use at least 2 points: one near the source row, one near the target row (both on the back-edge lane x).
+     - Optionally add a 3rd point near the target lane to re-enter cleanly.
+
+3) For edges entering a center-lane MERGE rectangle (from left or right lanes), prefer top entry:
+   entryX=0.5;entryY=0;entryPerimeter=1;
+   (Do not add waypoints unless it is a loopback.)
+
+## Layout (simple, predictable coordinates)
+- Use a three-lane grid:
+  - Left lane x=20, Center lane x=220, Right lane x=420.
+  - Vertical spacing: increase y by 100 per row (y = 40, 140, 240, ...).
+- Place:
+  - START at center lane top (x=220, y=40), then main linear steps continue down the center lane.
+  - For a decision at row r (center lane):
+    - The YES target node goes to left lane at row r+1.
+    - The NO target node goes to right lane at row r+1.
+  - If two branches converge (including multiple terminal outcomes), place MERGE in the center lane at the next available row and connect both branches to MERGE, then continue to END.
+- Node geometry must be explicit and non-zero:
+  - Ellipse: width=120, height=50
+  - Rectangle: width=180, height=60
+  - Diamond: width=140, height=80
+  - Do not create zero-size vertices (no width="0" or height="0").
+
+## Validity Constraints (hard checks you must satisfy)
+- START has no incoming edges; END has no outgoing edges.
+- Every other node has ≥1 incoming and:
+  - Decision: exactly 2 outgoing (YES left, NO right, both labeled).
+  - Non-decision / non-END: exactly 1 outgoing.
+- No node is orphaned; no edge is missing source/target.
+- Funnel multiple terminal points to a single END via a visible MERGE rectangle (not a 0×0 placeholder).
+
+## Self-check before returning (mandatory)
+- <mxCell id="0"/> and <mxCell id="1" parent="0"/> exist and are the first two children of <root>.
+- Every edge has a child <mxGeometry .../> (no self-closed edges).
+- No vertex has width="0" or height="0".
+- One and only one START and one END; START in-degree = 0, END out-degree = 0.
+- Every decision has exactly two labeled outgoing edges (YES left, NO right).
+- Decision outgoing edges include the required anchor styles.
+- Waypoints exist ONLY on loopback/back-edges.
+- No duplicate IDs; every node/edge parent="1".
+
+## Description
+{file_content}

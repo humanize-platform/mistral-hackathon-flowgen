@@ -128,6 +128,9 @@ The Streamlit app then renders the XML inside an **embedded Draw.io editor**, ma
 
 - Python 3.10+
 - A Mistral AI API key
+- **Mistral Agents**: You need to create two agents using the [Mistral Agent Builder](https://console.mistral.ai/). Use the system prompts provided in the `prompts/` directory:
+  - **Flow Analyst**: Use `prompts/prompt_flow_analyser.txt`
+  - **Flow Generator**: Use `prompts/prompt_flow_generator.txt`
 
 ### Installation
 
@@ -172,6 +175,9 @@ mistral-hackathon-flowgen/
 ├── app.py                  # Streamlit UI with embedded Draw.io editor
 ├── generate_flow_chart.py  # Flow chart generation logic
 ├── llm_factory.py          # Mistral AI agent invocation layer
+├── prompts/                # System prompts for Mistral Agents
+│   ├── prompt_flow_analyser.txt
+│   └── prompt_flow_generator.txt
 ├── requirements.txt        # Python dependencies
 ├── .env                    # API keys & agent IDs (not committed)
 └── README.md               # This file

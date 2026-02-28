@@ -1,0 +1,17 @@
+FlowGen AI - Editable Flow Diagrams from Plain Text
+
+We built FlowGen AI, a tool that generates fully editable Draw.io flow diagrams from plain-text process descriptions. Unlike every other AI assistant that produces static images, Mermaid snippets, or bullet lists when asked for a flow chart, FlowGen AI outputs industry-standard Draw.io XML that you can open, drag-and-drop edit, rearrange, and share using diagrams.net, Confluence, VS Code, or any .drawio-compatible tool.
+
+The core of FlowGen AI is a two-agent pipeline built entirely on the Mistral Agent Builder using the Mistral Medium Latest model.
+
+Agent 1 - Flow Analyst: This agent takes messy, conversational text from the user and transforms it into a clean, structured process breakdown. It identifies discrete steps, recognizes decision points and branches, orders everything sequentially, and resolves ambiguities. Think of it as an intelligent process consultant that turns "I go to market, buy veg, if it rains I take a cab otherwise walk home" into a properly numbered step list with clear transitions and decision logic.
+
+Agent 2 - Flow Generator: This agent takes the structured output from Agent 1 and converts it into valid Draw.io XML. It creates proper diagram nodes (rectangles for process steps, diamonds for decisions, ellipses for start/end), draws directed edges with correct source/target references, calculates spatial layout so nothing overlaps, and applies professional styling.
+
+We chose a two-agent architecture instead of a single prompt because splitting the work into two specialists produces significantly better results. The analyst focuses purely on understanding the process logic, while the generator focuses purely on producing valid, well-laid-out XML. This separation means decision branches are never dropped, XML is always well-formed, and the output is reliable and consistent.
+
+The frontend is a Streamlit app with an embedded Draw.io editor. Users type their process description, hit generate, and within seconds they have a fully interactive flow diagram rendered right in the browser. They can drag nodes, edit labels, add new shapes, and download the .drawio file for use in their own tools.
+
+Tech stack: Mistral AI Agents API, Python, LangChain Core, Streamlit, Draw.io embedded editor.
+
+GitHub: https://github.com/humanize-platform/mistral-hackathon-flowgen
