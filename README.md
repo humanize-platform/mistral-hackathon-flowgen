@@ -38,7 +38,7 @@ When you ask any AI code assistant today to create a flow chart, you get one of 
 
 ## 🏗️ Architecture — Powered by Two Mistral AI Agents
 
-At the core of FlowGen AI is a **two-agent pipeline** built on the [Mistral AI Agents API](https://docs.mistral.ai/capabilities/agents/). Each agent is a specialized, purpose-built AI that handles one stage of the transformation — and they chain together to go from raw text to a production-ready diagram.
+At the core of FlowGen AI is a **two-agent pipeline** built using the [Mistral Agent Builder](https://console.mistral.ai/) on the **Mistral Medium Latest** model. Each agent is a specialized, purpose-built AI — designed and configured in the Agent Builder — that handles one stage of the transformation. They chain together to go from raw text to a production-ready diagram.
 
 ```mermaid
 flowchart LR
