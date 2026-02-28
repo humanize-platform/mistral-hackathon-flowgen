@@ -6,6 +6,7 @@
 
 [![Built with Mistral AI](https://img.shields.io/badge/Built%20with-Mistral%20AI-orange?style=for-the-badge)](https://mistral.ai)
 [![Streamlit App](https://img.shields.io/badge/Streamlit-App-red?style=for-the-badge&logo=streamlit)](https://streamlit.io)
+[![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://langchain.com)
 
 ---
 
